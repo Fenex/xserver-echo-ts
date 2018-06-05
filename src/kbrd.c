@@ -50,7 +50,7 @@ subscribe_kbrd_events (
 	kbrd_device_t kbrds[KBRD_MAX_DEVICES];
 	unsigned int devices_count, i, count = 0;
 	struct input_event event;
-	bool listen = true;
+	bool listen = false;
 
 	if (NULL == handler)
 		return false;
@@ -59,9 +59,16 @@ subscribe_kbrd_events (
 	if (devices_count < 1)
 		return false;
 
-	for (i=0; i<devices_count; i++)
+
+	for (i=0; i<devices_count; i++) {
 		if (kbrds[i].fd == -1)
 			kbrds[i].fd = open(kbrds[i].path, O_RDONLY);
+		if (kbrds[i].fd != -1)
+			listen = true;
+	}
+
+	if (!listen)
+		return false;
 
 	while (listen) {
 		for (i=1; i<devices_count; i++) {
