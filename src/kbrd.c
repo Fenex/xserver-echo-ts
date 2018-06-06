@@ -21,7 +21,7 @@ static unsigned int
 detect_kbrd_devices (kbrd_device_t *kbrds) {
 	unsigned int count = 0;
 	DIR *dir;
-	struct dirent * f;
+	struct dirent *f;
 
 	if (NULL != (dir = opendir(PATH_DEVICE_LIST))) {
 		while (NULL != (f = readdir(dir)) && count < KBRD_MAX_DEVICES) {
@@ -62,7 +62,7 @@ subscribe_kbrd_events (
 
 	for (i=0; i<devices_count; i++) {
 		if (kbrds[i].fd == -1)
-			kbrds[i].fd = open(kbrds[i].path, O_RDONLY);
+			kbrds[i].fd = open(kbrds[i].path, O_RDONLY | O_NONBLOCK);
 		if (kbrds[i].fd != -1)
 			listen = true;
 	}
@@ -71,7 +71,7 @@ subscribe_kbrd_events (
 		return false;
 
 	while (listen) {
-		for (i=1; i<devices_count; i++) {
+		for (i=0; i<devices_count; i++) {
 			if (kbrds[i].fd == -1)
 				continue;
 
