@@ -112,5 +112,7 @@ main (int argc, char *argv[]) {
 	else
 		printf("Connection closed\r\n");
 
+	xcb_disconnect(ts_socket.con);
+
 	return 0;
 }
