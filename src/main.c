@@ -57,6 +57,8 @@ search_window_by_title (
 			if (rs != 0)
 				return rs;
 		}
+
+		free(reply);
 	}
 
 	return 0;
