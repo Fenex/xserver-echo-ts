@@ -25,7 +25,7 @@ detect_kbrd_devices (kbrd_device_t *kbrds) {
 
 	if (NULL != (dir = opendir(PATH_DEVICE_LIST))) {
 		while (NULL != (f = readdir(dir)) && count < KBRD_MAX_DEVICES) {
-			if (false == is_string_ends_with(f->d_name, KBRD_SIGNATURE))
+			if (false == vb_string_is_ends_with(f->d_name, KBRD_SIGNATURE))
 				continue;
 
 			kbrds[count].fd = -1;

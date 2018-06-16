@@ -40,7 +40,7 @@ search_window_by_title (
 		int len = xcb_get_property_value_length(prop_r);
 		if (len != 0) {
 			char *title = (char *)xcb_get_property_value(prop_r);
-			if (is_string_starts_with(title, TYPING_STATISTICS)) {
+			if (vb_string_is_starts_with(title, TYPING_STATISTICS)) {
 				return window;
 			}
 		}

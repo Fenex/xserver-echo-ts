@@ -1,0 +1,4 @@
+[submodule "vendor/vblibc"]
+	path = vendor/vblibc
+	url = git@github.com:Fenex/vblibc.git
+	branch = v1.0.0
